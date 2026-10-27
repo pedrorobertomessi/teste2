@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#FAF5F0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vanessa Rosa | Mentoria de Looks</title>
+<meta name="description" content="Achadinhos, guia de fornecedores e mentoria de looks com Vanessa Rosa, de Araraquara/SP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#FAF5F0; --surface:#FFFFFF; --ink:#2A1A1F; --muted:#6B5A5E; --line:rgba(42,26,31,.14);
+  --pink:#F6CDD9; --pink-2:#EFA9BE; --btn:#7A1642; --btn-ink:#FFFFFF; --wine:#5A1727; --gold:#C99A3F;
+  --head:#8A1448;
+  --sans:"Jost",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#190F12; --surface:#251619; --ink:#F7ECE6; --muted:#CDB8B4; --line:rgba(247,236,230,.18);
+  --pink:#4A1B2B; --pink-2:#7A2A44; --btn:#E9A3BA; --btn-ink:#3A0F1F; --head:#F4B8CB;
+}}
+:root[data-theme="dark"]{
+  --bg:#190F12; --surface:#251619; --ink:#F7ECE6; --muted:#CDB8B4; --line:rgba(247,236,230,.18);
+  --pink:#4A1B2B; --pink-2:#7A2A44; --btn:#E9A3BA; --btn-ink:#3A0F1F; --head:#F4B8CB;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 76px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:60}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{width:min(1180px,100% - 40px);margin-inline:auto}
+
+/* Header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px}
+.ib{width:44px;height:44px;display:grid;place-items:center;background:none;border:0;border-radius:8px;cursor:pointer;text-decoration:none}
+.ib svg{width:28px;height:28px}
+.ib:hover{background:color-mix(in srgb,var(--pink) 60%,transparent)}
+.right{justify-self:end}
+.logo{font:700 30px/1 var(--serif);letter-spacing:.01em;text-decoration:none;color:var(--head);padding:6px 4px}
+.dnav{display:none}
+@media (min-width:900px){
+  .bar{grid-template-columns:auto 1fr auto}
+  .logo{justify-self:start;margin-right:40px}
+  .menu-btn{display:none}
+  .dnav{display:flex;gap:34px;justify-content:center}
+  .dnav a{text-decoration:none;font-weight:500;font-size:15px;padding:8px 0;border-bottom:2px solid transparent}
+  .dnav a:hover{border-color:var(--gold)}
+  .bar{grid-template-columns:auto 1fr auto}
+}
+/* Drawer */
+.drawer{position:fixed;inset:0;z-index:70;visibility:hidden}
+.drawer .scrim{position:absolute;inset:0;background:rgba(20,8,12,.5);opacity:0;transition:opacity .25s}
+.drawer .panel{position:absolute;top:0;bottom:0;left:0;width:min(340px,86vw);background:var(--surface);padding:calc(env(safe-area-inset-top,0px) + 20px) 24px 24px;transform:translateX(-100%);transition:transform .28s;display:flex;flex-direction:column;gap:4px}
+.drawer.open{visibility:visible}.drawer.open .scrim{opacity:1}.drawer.open .panel{transform:none}
+.drawer a.l{font-size:22px;font-weight:500;text-decoration:none;padding:14px 0;border-bottom:1px solid var(--line)}
+.drawer .x{align-self:flex-end;margin-bottom:8px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:8px;background:var(--btn);color:var(--btn-ink);font:600 14px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer;transition:filter .2s,transform .2s}
+.btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.btn.ghost{background:none;color:var(--head);border:1.5px solid currentColor}
+
+/* Hero carousel */
+.hero{position:relative;background:var(--pink);overflow:hidden;width:min(1240px,100% - 24px);margin:20px auto 0;border-radius:22px}
+.slides{display:grid}
+.slide{grid-area:1/1;position:relative;min-height:600px;padding:44px 24px 104px;display:flex;flex-direction:column;align-items:center;text-align:center;opacity:0;visibility:hidden;transition:opacity .6s,visibility .6s}
+.slide.on{opacity:1;visibility:visible}
+.badge{background:var(--btn);color:var(--btn-ink);font:700 clamp(22px,5vw,34px)/1 var(--sans);letter-spacing:.04em;text-transform:uppercase;padding:18px 34px;border-radius:0 0 22px 22px;margin-top:-44px;margin-bottom:28px;padding-top:62px}
+.kick{font:500 clamp(14px,3.4vw,20px)/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px}
+.slide h1,.slide h2{font:700 clamp(38px,9.4vw,76px)/1.02 var(--sans);text-transform:uppercase;color:var(--head);margin:0;max-width:14ch;letter-spacing:-.01em}
+.slide p.sub{margin:16px 0 0;max-width:40ch;color:var(--ink);font-size:18px}
+.ph{margin:28px auto 0;width:min(210px,52vw);aspect-ratio:4/5;border-radius:999px 999px 14px 14px;overflow:hidden;border:3px solid var(--gold);box-shadow:0 26px 50px -26px rgba(90,23,39,.6);background:var(--pink-2)}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.slide .btn{position:absolute;left:24px;bottom:30px}
+.ctrl{position:absolute;right:14px;bottom:30px;display:flex;gap:0;z-index:2}
+.ctrl button{width:44px;height:48px;background:none;border:0;cursor:pointer;display:grid;place-items:center;color:var(--head)}
+.ctrl svg{width:26px;height:26px}
+@media (min-width:900px){
+  .slide{min-height:560px;flex-direction:row;justify-content:center;gap:72px;text-align:left;padding:72px 0 110px}
+  .slide .txt{display:flex;flex-direction:column;align-items:flex-start;max-width:560px}
+  .slide .btn{left:max(20px,calc((100% - 1180px)/2))}
+  .badge{margin:0 0 24px;padding:14px 26px;border-radius:12px}
+  .ph{margin:0;width:340px}
+  .ctrl{right:max(14px,calc((100% - 1180px)/2))}
+}
+@media (max-width:899px){.slide .txt{display:flex;flex-direction:column;align-items:center}.slide .badge{margin-top:-44px}}
+
+/* Benefits strip */
+.strip{margin-top:28px;background:var(--surface);border-block:1px solid var(--line)}
+.strip ul{list-style:none;margin:0;padding:0;display:flex;gap:40px;overflow-x:auto;scrollbar-width:none}
+.strip li{flex:none;display:flex;align-items:center;gap:12px;padding:22px 0;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase}
+.strip li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.strip small{display:block;font:400 14px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--muted)}
+
+/* Sections */
+section{padding:72px 0}
+h2.t{font:500 clamp(34px,5.6vw,52px)/1.1 var(--sans);margin:0 0 28px;letter-spacing:-.01em}
+.cats{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px 8px;margin:0 -20px;scrollbar-width:none}
+.catw{flex:0 0 76%;scroll-snap-align:start;position:relative}
+.cat{position:relative;aspect-ratio:3/4;display:flex;align-items:flex-end;justify-content:center;padding:0 16px 34px;text-decoration:none;overflow:hidden;color:#fff;isolation:isolate}
+.cat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1;transition:transform .5s}
+.cat:hover img{transform:scale(1.04)}
+.cat::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(30,8,16,.62),transparent 52%);z-index:-1;transition:opacity .3s}
+.cat span.n{font:500 clamp(26px,5vw,32px)/1.1 var(--sans);letter-spacing:.04em;text-transform:uppercase;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.cat span.d{display:block;text-align:center;font:400 15px/1.3 var(--sans);margin-top:6px;opacity:.95}
+.cat:hover::after{opacity:.6}
+.c1{background:linear-gradient(160deg,#B5305F,#5A1727)}
+.c2{background:linear-gradient(160deg,#E4B35B,#9A6C1B)}
+.c3{background:linear-gradient(160deg,#E89BB4,#A7385F)}
+.c4{background:linear-gradient(160deg,#8A3A52,#3E0F1D)}
+@media (min-width:900px){.cats{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible;padding:0;margin:0}.cat{flex:none}}
+
+/* Learn */
+#aprender{background:var(--surface);border-block:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pc{padding:36px 32px;background:var(--pink);display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.pc.alt{background:var(--wine);color:#FBEFDD}
+.pc.alt .btn{background:#F6CDD9;color:#4A1220}
+.pc h3{font:700 clamp(26px,3.4vw,36px)/1.08 var(--sans);text-transform:uppercase;margin:0;color:var(--head)}
+.pc.alt h3{color:#F6CDD9}
+.pc p{margin:0 0 8px;max-width:44ch}
+.tagp{font:600 14px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--head)}
+.pc.alt .tagp{color:#E8C377}
+@media (max-width:760px){.two{grid-template-columns:1fr}.pc{padding:30px 24px}}
+
+/* Community */
+.comm{text-align:center;max-width:680px;margin-inline:auto}
+.comm h2{font:500 clamp(30px,5vw,44px)/1.15 var(--sans);margin:0 0 14px}
+.comm p{margin:0 0 28px;color:var(--muted);font-size:18px}
+.comm .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.comm .btn{min-width:240px}
+.pr{font:600 24px/1 var(--sans)!important;margin:0 0 8px!important}
+#mentoria{background:var(--bg)}
+.iah{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:48px}
+.iah h2.t{margin-bottom:12px}.iah .lead{margin:0;color:var(--muted);font-size:18px;max-width:46ch}
+.feats{list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.feats li{position:relative;padding-left:34px}
+.feats li::before{content:"";position:absolute;left:0;top:.45em;width:14px;height:14px;border-radius:50%;background:var(--gold)}
+.feats b{display:block;font-weight:600;font-size:18px}.feats span{color:var(--muted);font-size:16px}
+.nx{margin:0 0 40px}
+.nx-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.nx-head h3{font:600 clamp(22px,3vw,28px)/1.2 var(--sans);margin:0;color:var(--ink)}
+.nx-hint{font-size:14px;color:var(--muted)}.nx-hint .h-d{display:none}
+.nx-row{position:relative;margin:0 -20px}
+.nx-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:20px;padding:30px 20px;scrollbar-width:none;cursor:grab;overscroll-behavior-x:contain}
+.nx-track::-webkit-scrollbar{display:none}
+.nx-track.drag{cursor:grabbing;scroll-snap-type:none}
+.nx-card{position:relative;flex:0 0 80%;aspect-ratio:16/9;padding:0;border:0;border-radius:6px;background:var(--pink);overflow:hidden;scroll-snap-align:start;cursor:pointer;transform-origin:center;box-shadow:0 6px 18px -10px rgba(0,0,0,.4);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,opacity .35s,filter .35s}
+.nx-card:first-child{transform-origin:left center}.nx-card:last-child{transform-origin:right center}
+.nx-card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none}
+.nx-cap{position:absolute;left:0;right:0;bottom:0;padding:34px 14px 10px;background:linear-gradient(to top,rgba(30,8,16,.82),transparent);color:#fff;font:600 15px/1.2 var(--sans);text-align:left;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
+.nx-card:focus-visible{z-index:5;transform:scale(1.08)}.nx-card:focus-visible .nx-cap{opacity:1;transform:none}
+.nx-arrow{display:none;position:absolute;top:30px;bottom:30px;width:56px;z-index:8;border:0;padding:0;align-items:center;justify-content:center;color:#fff;cursor:pointer;opacity:0;transition:opacity .25s}
+.nx-prev{left:0;background:linear-gradient(to right,rgba(25,15,18,.78),transparent)}
+.nx-next{right:0;background:linear-gradient(to left,rgba(25,15,18,.78),transparent)}
+.nx-arrow[disabled]{opacity:0!important;pointer-events:none}
+.nx-bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.nx-bar i{display:block;height:100%;width:40%;background:var(--gold);border-radius:2px;transition:margin-left .12s linear}
+.nx.pre .nx-card{opacity:0}
+.nx.in .nx-card{animation:nxin .65s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--k)*80ms)}
+@keyframes nxin{from{opacity:0;transform:translateX(34px) scale(.96)}}
+@media (min-width:700px){.nx-card{flex-basis:45%}}
+@media (min-width:1000px){.nx-card{flex-basis:30%}}
+@media (hover:hover) and (min-width:700px){
+  .nx-hint .h-m{display:none}.nx-hint .h-d{display:inline}
+  .nx-arrow{display:flex}.nx-row:hover .nx-arrow:not([disabled]){opacity:1}
+  .nx-card:hover{z-index:5;transform:scale(1.12);box-shadow:0 22px 44px -14px rgba(0,0,0,.6)}
+  .nx-card:hover .nx-cap{opacity:1;transform:none}
+  .nx-track:not(.drag):hover .nx-card:not(:hover){opacity:.6;filter:saturate(.75)}
+}
+@media (prefers-reduced-motion:reduce){.nx-card,.nx-cap,.nx-bar i{transition:none}.nx.in .nx-card{animation:none}.nx.pre .nx-card{opacity:1}}
+dialog#lb{border:0;padding:0;background:transparent;color:#fff;width:min(1100px,94vw);max-height:92vh;max-height:92dvh;overflow:visible}
+dialog#lb::backdrop{background:rgba(20,8,12,.88)}
+#lbi{width:100%;height:auto;max-height:78vh;max-height:78dvh;object-fit:contain;display:block;background:#000;touch-action:pan-y}
+#lbc{margin:12px 0 0;text-align:center;font-size:15px}
+.lb-nav{position:absolute;top:calc(50% - 40px);width:46px;height:46px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;cursor:pointer}
+.lb-nav:hover{background:rgba(0,0,0,.8)}.lb-p{left:10px}.lb-n{right:10px}
+dialog#lb .vx{top:-48px;right:0}
+.offers{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.offer{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line)}
+.offer img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;display:block}
+.offer .in{padding:28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.offer h3{font:700 clamp(28px,3.6vw,38px)/1.05 var(--sans);text-transform:uppercase;margin:0;color:var(--head)}
+.when{font:500 14px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.price{font:600 46px/1 var(--sans);margin:4px 0}.price small{font-size:20px;font-weight:500;margin-right:6px}
+.offer p{margin:0;color:var(--muted)}
+.offer ul{margin:0;padding-left:20px;color:var(--muted);display:grid;gap:4px}
+.offer .btn{margin-top:auto;align-self:flex-start}
+.offer.prem{background:var(--wine);color:#FBEFDD;border-color:transparent}
+.prem h3{color:#E8C377}.prem .when,.prem p,.prem ul{color:#E4CBBF}.prem .btn{background:#E8C377;color:#3A0F1A}
+.offer .acts{margin-top:auto;display:flex;flex-wrap:wrap;gap:12px}.offer .acts .btn{margin-top:0}
+.btn.wa{gap:8px;background:#25D366;color:#0B3D1E}.prem .btn.wa{background:#25D366;color:#0B3D1E}
+@media (max-width:860px){.iah,.offers{grid-template-columns:1fr}.iah{gap:28px}}
+.vbtn{position:absolute;top:12px;right:12px;z-index:3;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border:0;border-radius:999px;background:rgba(255,255,255,.94);color:#7A1642;font:600 14px/1 var(--sans);cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.5)}
+.vbtn svg{width:20px;height:20px}.vbtn:hover{background:#fff}
+dialog#vm{border:0;padding:0;background:#000;color:#fff;width:min(380px,92vw);max-height:94vh;max-height:94dvh;overflow:hidden}
+dialog#vm::backdrop{background:rgba(20,8,12,.75)}
+#vm video{width:100%;max-height:80vh;max-height:80dvh;display:block;background:#000}
+#vm p{margin:0;padding:12px 16px;font-size:15px}
+.vx{position:absolute;top:8px;right:8px;z-index:2;width:40px;height:40px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;cursor:pointer}
+.vx svg{width:22px;height:22px}
+.vsl{width:min(100%,260px);aspect-ratio:9/16;object-fit:cover;background:#000;display:block}
+#parcerias{background:var(--surface);border-block:1px solid var(--line)}
+.par{display:grid;grid-template-columns:1fr;gap:64px;align-items:center}
+.par .lead{margin:0 0 28px;font-size:19px;color:var(--muted);max-width:46ch}
+.par .vsl{width:min(300px,100%)}
+.pl{font:600 14px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:44px 0 14px}
+.partners{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px}
+.partners li{border:1px solid var(--line);padding:18px 16px;text-align:center;font:600 15px/1.25 var(--sans);letter-spacing:.05em;text-transform:uppercase;background:var(--bg)}
+.partners a{text-decoration:none}
+@media (max-width:860px){.par{grid-template-columns:1fr;gap:36px}.par .vsl{justify-self:center}}
+.hb{position:relative;overflow:hidden;background:linear-gradient(100deg,#FCEBE4,#FBF0E8 50%,#F5DCD1);color:#3A1420}
+.hb::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px 300px at 4% 18%,rgba(240,160,185,.42),transparent 70%),radial-gradient(380px 260px at 0% 100%,rgba(240,160,185,.32),transparent 70%)}
+.hb-img{display:block;width:100%;height:auto;position:relative;-webkit-mask-image:linear-gradient(to right,transparent,#000 14%),linear-gradient(to bottom,#000 80%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 14%),linear-gradient(to bottom,#000 80%,transparent);mask-composite:intersect}
+.hb .wrap{position:relative;z-index:1}
+.hb-txt{text-align:center;margin-top:-30px;padding-bottom:48px}
+.wm{margin:0;font:700 clamp(56px,16vw,96px)/.95 var(--serif);letter-spacing:-.005em;background:linear-gradient(95deg,#B5235A 0%,#C2476F 48%,#A9792C 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wm i{display:block;margin-top:4px;font:italic 600 clamp(34px,10vw,54px)/1.1 var(--serif);color:#B5235A;-webkit-text-fill-color:#B5235A}
+.tg{margin:16px 0 26px;font:500 13px/1.4 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:#4A2A32}
+.cta-b{display:inline-flex;align-items:center;gap:10px;min-height:54px;padding:0 28px;border-radius:999px;background:linear-gradient(100deg,#B3245A,#D55A82);color:#fff;font:500 17px/1 var(--sans);text-decoration:none;box-shadow:0 14px 28px -14px rgba(179,36,90,.7);transition:transform .2s,filter .2s}
+.cta-b:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.cta-b svg{width:18px;height:18px}
+@media (min-width:900px){
+  .hb{min-height:540px;display:flex;align-items:center}
+  .hb-img{position:absolute;right:0;top:0;height:100%;width:auto;max-width:64%;object-fit:cover;object-position:35% 50%;-webkit-mask-image:linear-gradient(to right,transparent,#000 22%);mask-image:linear-gradient(to right,transparent,#000 22%)}
+  .hb-txt{text-align:left;margin:0;padding:64px 0;max-width:520px}
+  .tg{font-size:15px}
+}
+.me{width:168px;aspect-ratio:1;border-radius:50%;overflow:hidden;margin:0 auto 24px;border:3px solid var(--gold)}
+.me img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.note{margin-top:22px;font-size:14px;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:36px 0 48px;background:var(--surface);color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+.foot p{margin:0;max-width:60ch}
+.foot a{font-weight:600;color:var(--ink);text-decoration:none}
+.fl{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== Showcase estilo Netflix, na identidade original ===== */
+header{background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2)}
+/* abertura: entrada orquestrada */
+.hb-img{animation:bb 2.8s cubic-bezier(.2,.7,.2,1) backwards}
+.hb-txt>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards}
+.hb-txt>:nth-child(2){animation-delay:.14s}.hb-txt>:nth-child(3){animation-delay:.28s}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}}
+@keyframes bb{from{transform:scale(1.07)}}
+.hb-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 26px;border-radius:999px;border:1.5px solid #B3245A;background:rgba(255,255,255,.45);color:#B3245A;font:500 17px/1 var(--sans);text-decoration:none;transition:background-color .2s,transform .2s}
+.btn-g:hover{background:rgba(255,255,255,.8);transform:translateY(-2px)}
+@media (min-width:900px){.hb-cta{justify-content:flex-start}}
+
+/* vitrines em fileira */
+#vitrines h2.t{margin-bottom:0}
+.vit .nx-track{gap:14px}
+.vit .nx-card{aspect-ratio:3/4;flex-basis:74%;border-radius:0}
+@media (min-width:700px){.vit .nx-card{flex-basis:calc((100% - 28px)/3)}}
+.vit .nx-bar{margin-top:-8px}
+.cat{position:absolute;inset:0;aspect-ratio:auto}
+.nx-card:hover .cat img{transform:scale(1.05)}
+.vbtn{transition:background-color .2s}
+
+/* cards de curso: vídeo ao lado do texto */
+.pc{flex-direction:row;align-items:center;gap:32px;padding:32px}
+.pc .vsl{flex:none;width:min(46%,230px);box-shadow:0 22px 40px -22px rgba(58,15,26,.7)}
+.pc-b{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
+@media (max-width:1060px){.two{grid-template-columns:1fr}}
+@media (max-width:620px){.pc{flex-direction:column;align-items:flex-start;gap:22px;padding:26px 22px}.pc .vsl{width:min(100%,260px)}}
+
+/* parcerias em duas colunas */
+@media (min-width:900px){
+  .par>div{display:grid;grid-template-columns:1fr 1fr;column-gap:72px;align-items:start}
+  .par h2.t,.par .lead,.par .btn{grid-column:1}
+  .par .btn{justify-self:start}
+  .par .pl{grid-column:2;grid-row:1;margin:12px 0 14px}
+  .par .partners{grid-column:2;grid-row:2/span 3;max-width:none}
+}
+@media (prefers-reduced-motion:reduce){.hb-img,.hb-txt>*,.nx.in .nx-card{animation:none!important}.nx.pre .nx-card{opacity:1}}
+
+/* ajustes finos de quebra de linha */
+.wm{max-width:4.4em}
+@media (max-width:899px){.wm{margin-inline:auto}}
+.slide h1,.slide h2{max-width:16ch}
+.pc .vsl{width:min(40%,210px)}
+.pc h3{font-size:clamp(24px,2.4vw,30px);overflow-wrap:break-word}
+@media (max-width:620px){.pc h3{font-size:clamp(26px,7vw,32px)}.pc .vsl{width:min(100%,260px)}}
+
+/* ===== Ajustes de responsividade (hospedagem estática) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+img,video{max-width:100%}
+.foot a{overflow-wrap:anywhere}
+@media (max-width:480px){
+  .slide{padding-bottom:150px}
+  .slide .btn{left:24px;right:24px;bottom:78px}
+  .ctrl{left:0;right:0;bottom:22px;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <button class="ib menu-btn" id="open" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <a class="logo" href="#topo" aria-label="Vanessa Rosa, início">Vanessa Rosa</a>
+    <nav class="dnav" aria-label="Seções">
+      <a href="#vitrines">Vitrines</a><a href="#aprender">Aprender</a><a href="#mentoria">Mentoria</a><a href="#parcerias">Parcerias</a>
+    </nav>
+    <a class="ib right" href="https://www.instagram.com/vanessarosacomestilo/" target="_blank" rel="noopener" aria-label="Instagram de Vanessa Rosa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+    </a>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="scrim" id="scrim"></div>
+  <div class="panel" role="dialog" aria-label="Menu">
+    <button class="ib x" id="close" aria-label="Fechar menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+    <a class="l" href="#vitrines">Vitrines</a>
+    <a class="l" href="#aprender">Aprenda comigo</a>
+    <a class="l" href="#mentoria">Aula VIP e Mentoria</a>
+    <a class="l" href="#parcerias">Divulgue sua loja</a>
+    <a class="l" href="#comunidade">Comunidade</a>
+    <a class="l" href="https://www.instagram.com/vanessarosacomestilo/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</div>
+
+<main id="topo">
+<div class="hb" role="region" aria-label="Apresentação">
+  <img class="hb-img" src="assets/img-fc15a70c73.jpg" alt="Vanessa Rosa de terninho amarelo em uma loja de moda" width="800" height="492" fetchpriority="high">
+  <div class="wrap">
+    <div class="hb-txt">
+      <h1 class="wm">Vanessa Rosa<i>Com Estilo</i></h1>
+      <p class="tg">Moda que valoriza você</p>
+      <div class="hb-cta">
+        <a class="cta-b" href="#vitrines">Conheça nossas coleções<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+        <a class="btn-g" href="#mentoria">Ver aula VIP e mentoria</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hero" role="region" aria-roledescription="carrossel" aria-label="Destaques">
+  <div class="slides">
+    <article class="slide on" aria-label="1 de 3">
+      <div class="txt">
+        <div class="badge">Guia Premium</div>
+        <p class="kick">Para quem quer revender moda</p>
+        <h2>Os melhores fornecedores de SP</h2>
+        <p class="sub">Uma lista de fornecedores de moda feminina para revender com mais segurança.</p>
+      </div>
+      <div class="ph"><img src="assets/img-07af2a4c8a.jpg" alt="Look com macacão azul-marinho" width="356" height="475"></div>
+      <a class="btn" href="https://pay.kiwify.com.br/dtQJPCi" target="_blank" rel="noopener">Quero o guia</a>
+    </article>
+    <article class="slide" aria-label="2 de 3" aria-hidden="true">
+      <div class="txt">
+        <div class="badge">Curso</div>
+        <p class="kick">Comece no seu ritmo</p>
+        <h2>Como vender moda e lucrar na internet</h2>
+        <p class="sub">Comece com o que você tem e construa a vida dos seus sonhos.</p>
+      </div>
+      <div class="ph"><img src="assets/img-0a9e502360.jpg" alt="Trabalhando no notebook" width="356" height="378"></div>
+      <a class="btn" href="https://pay.kiwify.com.br/iESbRG4" target="_blank" rel="noopener" tabindex="-1">Conhecer o curso</a>
+    </article>
+  <article class="slide" aria-label="3 de 3" aria-hidden="true">
+      <div class="txt">
+        <div class="badge">Aula VIP</div>
+        <p class="kick">Criação de conteúdo com IA</p>
+        <h2>Da ideia ao vídeo</h2>
+        <p class="sub">Conheça as ferramentas e acompanhe uma criação real.</p>
+      </div>
+      <div class="ph"><img src="assets/img-5e554dd80c.jpg" alt="Vanessa Rosa gravando um vídeo com o celular" width="520" height="520"></div>
+      <a class="btn" href="#mentoria" tabindex="-1">Quero participar</a>
+    </article>
+  </div>
+  <div class="ctrl">
+    <button id="prev" aria-label="Slide anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button id="next" aria-label="Próximo slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <button id="pp" aria-label="Pausar"><svg id="ppi" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/></svg></button>
+  </div>
+</div>
+
+<div class="strip"><div class="wrap"><ul>
+  <li><span>Vitrines escolhidas<small>peças que eu indico</small></span></li>
+  <li><span>Guia de fornecedores<small>para quem quer revender</small></span></li>
+  <li><span>Mentoria de looks<small>estilo para o dia a dia</small></span></li>
+</ul></div></div>
+
+<section id="vitrines">
+  <div class="wrap">
+    <h2 class="t">Compre por vitrine</h2>
+    <div class="nx vit pre" role="region" aria-roledescription="carrossel" aria-label="Vitrines">
+      <div class="nx-row">
+        <button class="nx-arrow nx-prev" type="button" aria-label="Vitrines anteriores" disabled><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>
+        <div class="nx-track">
+          <div class="catw nx-card" style="--k:0"><a class="cat c1" data-l="M" href="https://www.mclmodafeminina.com.br/?parceiro=177" target="_blank" rel="noopener sponsored"><img src="assets/img-e575c2fcc3.jpg" alt="" loading="lazy" width="356" height="475"><span><span class="n">Micheline</span><span class="d">Moda cristã</span></span></a><button class="vbtn" type="button" data-src="assets/video-8dcc73e0f9.mp4" data-t="Micheline: blusa azul de botões dourados"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>Ver vídeo</button></div>
+          <div class="catw nx-card" style="--k:1"><a class="cat c2" data-l="S" href="https://onelink.shein.com/57/65vgj3iiuhyz" target="_blank" rel="noopener sponsored"><img src="assets/img-3531ed55d1.jpg" alt="" loading="lazy" width="356" height="475"><span><span class="n">SHEIN</span><span class="d">Minhas escolhas</span></span></a><button class="vbtn" type="button" data-src="assets/video-40afcd05de.mp4" data-t="SHEIN: camisa listrada rosa e jeans"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>Ver vídeo</button></div>
+          <div class="catw nx-card" style="--k:2"><a class="cat c4" data-l="S" href="https://collshp.com/vanessarosaestilo?view=storefront" target="_blank" rel="noopener sponsored"><img src="assets/img-7fdec1a530.jpg" alt="" loading="lazy" width="356" height="475"><span><span class="n">Shopee</span><span class="d">Looks e descontos</span></span></a><button class="vbtn" type="button" data-src="assets/video-3cb2de472b.mp4" data-t="Shopee: blusa azul e jeans"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>Ver vídeo</button></div>
+          <div class="catw nx-card" style="--k:3"><a class="cat c3" data-l="R" href="https://store.awin.com/vanessa-umbelino?fbclid=PARlRTSAUHHCRwZG9mAmZkaWQWUNxznlpLrP6et4V9drg5JKRtJPuykGV4dG4DYWVtAjEwAHNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABp5OTwUxdoVueL7uivV-09f8ZKr3RuckbsNjVdK_w8v-LTPTA9dUojKrUOxUk_aem_w9SR004iiJDvE8rqlziyNA" target="_blank" rel="noopener sponsored"><img src="assets/img-3aa09e4a19.jpg" alt="" loading="lazy" width="356" height="475"><span><span class="n">Riachuelo</span><span class="d">Looks que eu indico</span></span></a><button class="vbtn" type="button" data-src="assets/video-3200fbda69.mp4" data-t="Riachuelo: colete marrom, camisa e calça pantalona"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>Ver vídeo</button></div>
+        </div>
+        <button class="nx-arrow nx-next" type="button" aria-label="Próximas vitrines"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+      </div>
+      <div class="nx-bar" aria-hidden="true"><i></i></div>
+    </div>
+  </div>
+</section>
+
+<section id="aprender">
+  <div class="wrap">
+    <h2 class="t">Aprenda comigo</h2>
+    <div class="two">
+      <article class="pc">
+        <video class="vsl" controls playsinline preload="none" poster="assets/img-f343d7628b.jpg" data-vsl="assets/video-82c34cf1b9.mp4" aria-label="Vídeo de apresentação do curso"></video>
+        <div class="pc-b">
+        <span class="tagp">Curso</span>
+        <h3>Como vender moda e lucrar na internet</h3>
+        <p>Comece com o que você tem e construa no seu próprio ritmo.</p>
+        <a class="btn" href="https://pay.kiwify.com.br/iESbRG4" target="_blank" rel="noopener">Conhecer o curso</a>
+        </div>
+      </article>
+      <article class="pc alt">
+        <video class="vsl" controls playsinline preload="none" poster="assets/img-b4f302bcba.jpg" src="assets/video-guia-premium.mp4" aria-label="Vídeo do Guia Premium de fornecedores"></video>
+        <div class="pc-b">
+        <span class="tagp">Guia Premium</span>
+        <h3>Os melhores fornecedores de SP</h3>
+        <p>Fornecedores de moda feminina para você revender com mais segurança.</p>
+        <p class="pr">Apenas R$ 19,90</p>
+        <a class="btn" href="https://pay.kiwify.com.br/dtQJPCi" target="_blank" rel="noopener">Quero o guia</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="mentoria">
+  <div class="wrap">
+    <div class="iah">
+      <div>
+        <h2 class="t">Criação de conteúdo com IA</h2>
+        <p class="lead">Da ideia ao vídeo, no seu ritmo. Aprenda as ferramentas e veja um conteúdo ser criado passo a passo.</p>
+      </div>
+      <ul class="feats">
+        <li><b>Crie imagens e vídeos</b><span>com mais facilidade e qualidade.</span></li>
+        <li><b>Apresente produtos com criatividade</b><span>e destaque o seu negócio.</span></li>
+        <li><b>Agilize a produção de conteúdo</b><span>e economize tempo.</span></li>
+        <li><b>Transforme habilidades em oportunidades</b><span>vídeos para lojas e empresas, divulgação de produtos e serviços de criação digital.</span></li>
+      </ul>
+    </div>
+    <div class="nx pre" data-lb role="region" aria-roledescription="carrossel" aria-label="Veja por dentro">
+      <div class="nx-head"><h3>Veja por dentro</h3><span class="nx-hint"><span class="h-m">Deslize para ver mais</span><span class="h-d">Passe o mouse para destacar</span></span></div>
+      <div class="nx-row">
+        <button class="nx-arrow nx-prev" type="button" aria-label="Imagens anteriores" disabled><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>
+        <div class="nx-track" id="nxt">
+        <button class="nx-card" type="button" style="--k:0" data-i="0" aria-label="Ampliar imagem 1 de 6: Apresentação"><img src="assets/img-ec026c23ef.jpg" alt="Vanessa Rosa – Criação de conteúdo com inteligência artificial: da ideia ao vídeo" width="1200" height="675" loading="lazy" draggable="false"><span class="nx-cap">Apresentação</span></button>
+        <button class="nx-card" type="button" style="--k:1" data-i="1" aria-label="Ampliar imagem 2 de 6: A IA nos negócios"><img src="assets/img-80a075cab9.jpg" alt="A IA nos negócios: crie imagens e vídeos, apresente produtos com criatividade e agilize a produção de conteúdo" width="1200" height="675" loading="lazy" draggable="false"><span class="nx-cap">A IA nos negócios</span></button>
+        <button class="nx-card" type="button" style="--k:2" data-i="2" aria-label="Ampliar imagem 3 de 6: Habilidades em oportunidades"><img src="assets/img-643cb536fe.jpg" alt="Como transformar habilidades em oportunidades: vídeos para lojas, conteúdo para divulgar produtos e serviços de criação digital" width="1200" height="675" loading="lazy" draggable="false"><span class="nx-cap">Habilidades em oportunidades</span></button>
+        <button class="nx-card" type="button" style="--k:3" data-i="3" aria-label="Ampliar imagem 4 de 6: Experiência prática"><img src="assets/img-33a19207fd.jpg" alt="Experiência prática: da ideia ao vídeo, conheça os aplicativos e acompanhe uma demonstração" width="1200" height="675" loading="lazy" draggable="false"><span class="nx-cap">Experiência prática</span></button>
+        <button class="nx-card" type="button" style="--k:4" data-i="4" aria-label="Ampliar imagem 5 de 6: Aula VIP"><img src="assets/img-229f4b8aac.jpg" alt="Aula VIP, experiência prática, sábado, R$ 15,00" width="1200" height="675" loading="lazy" draggable="false"><span class="nx-cap">Aula VIP</span></button>
+        <button class="nx-card" type="button" style="--k:5" data-i="5" aria-label="Ampliar imagem 6 de 6: Mentoria Premium"><img src="assets/img-c4f7e17ed9.jpg" alt="Mentoria Premium de 3 meses, R$ 97,00" width="1200" height="675" loading="lazy" draggable="false"><span class="nx-cap">Mentoria Premium</span></button>
+        </div>
+        <button class="nx-arrow nx-next" type="button" aria-label="Próximas imagens"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+      </div>
+      <div class="nx-bar" aria-hidden="true"><i id="nxb"></i></div>
+    </div>
+    <div class="offers">
+      <article class="offer">
+        <img src="assets/img-d094486bdd.jpg" alt="Vanessa Rosa sorrindo diante do notebook" width="520" height="520" loading="lazy">
+        <div class="in">
+          <span class="when">Sábado</span>
+          <h3>Aula VIP</h3>
+          <p>Experiência prática: conheça as ferramentas e acompanhe uma criação real.</p>
+          <div class="price"><small>R$</small>15,00</div>
+          <a class="btn" href="https://ig.me/m/vanessarosacomestilo" target="_blank" rel="noopener">Quero participar</a>
+        </div>
+      </article>
+      <article class="offer prem">
+        <img src="assets/img-a8a31cfbc8.jpg" alt="Vanessa Rosa trabalhando no notebook" width="520" height="520" loading="lazy">
+        <div class="in">
+          <span class="when">3 meses</span>
+          <h3>Mentoria Premium</h3>
+          <ul><li>Aulas e conteúdos práticos</li><li>Acompanhamento no grupo por 3 meses</li><li>Suporte para suas dúvidas</li><li>Evolução do seu conteúdo</li></ul>
+          <div class="price"><small>R$</small>97,00</div>
+          <div class="acts">
+            <a class="btn" href="https://ig.me/m/vanessarosacomestilo" target="_blank" rel="noopener">Quero a mentoria</a>
+            <a class="btn wa" href="https://wa.me/5516997006342?text=Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20a%20Mentoria%20Premium." target="_blank" rel="noopener" aria-label="Falar no WhatsApp sobre a Mentoria Premium"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.54-3.7 8.22-8.23 8.22Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>Falar no WhatsApp</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="parcerias">
+  <div class="wrap par">
+    <div>
+      <h2 class="t">Divulgue sua loja</h2>
+      <p class="lead">Apresente sua vitrine na Vanessa Rosa com Estilo. Conteúdo em vídeo (UGC) e looks reais para mostrar a sua coleção.</p>
+      <a class="btn" href="https://ig.me/m/vanessarosacomestilo" target="_blank" rel="noopener">Quero divulgar minha loja</a>
+      <h3 class="pl">Lojas parceiras</h3>
+      <ul class="partners">
+        <li>Carmen Steffens</li>
+        <li><a href="https://www.mclmodafeminina.com.br/?parceiro=177" target="_blank" rel="noopener sponsored">Micheline Moda Cristã</a></li>
+        <li>Jubiju Modas</li>
+        <li>Florecer Moda Feminina</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="comunidade">
+  <div class="wrap comm">
+    <div class="me"><img src="assets/img-3144de70cb.jpg" alt="Vanessa Rosa sorrindo" width="450" height="540"></div>
+    <h2>Faça parte da comunidade</h2>
+    <p>Eu inspiro mulheres reais a se vestirem melhor. Acompanhe os looks no Instagram e me chame para parcerias e conteúdo para marcas e lojas (UGC).</p>
+    <div class="row">
+      <a class="btn" href="https://www.instagram.com/vanessarosacomestilo/" target="_blank" rel="noopener">Seguir no Instagram</a>
+    </div>
+    <p class="note">Vanessa Rosa, Araraquara/SP</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>Vanessa Rosa, Araraquara/SP</p>
+    <div class="fl">
+      <a href="mailto:vanessaumbelino68@gmail.com">vanessaumbelino68@gmail.com</a>
+      <a href="https://www.instagram.com/vanessarosacomestilo/" target="_blank" rel="noopener">@vanessarosacomestilo</a>
+    </div>
+  </div>
+</footer>
+
+<dialog id="vm" aria-label="Vídeo">
+  <button class="vx" type="button" aria-label="Fechar vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <video id="vmv" controls playsinline></video>
+  <p id="vmt"></p>
+</dialog>
+
+<dialog id="lb" aria-label="Imagem ampliada">
+  <button class="vx" id="lbx" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  <button class="lb-nav lb-p" id="lbp" type="button" aria-label="Imagem anterior"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4l-8 8 8 8"/></svg></button>
+  <img id="lbi" alt="">
+  <button class="lb-nav lb-n" id="lbn" type="button" aria-label="Próxima imagem"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l8 8-8 8"/></svg></button>
+  <p id="lbc"></p>
+</dialog>
+<script>
+(function(){
+  // Cabeçalho vira vidro ao rolar
+  var hd=document.querySelector('header');
+  function sc(){hd.classList.toggle('solid',window.scrollY>40)}
+  sc();window.addEventListener('scroll',sc,{passive:true});
+
+  // Imagem ampliada (galeria)
+  var lb=document.getElementById('lb'),li=document.getElementById('lbi'),lc=document.getElementById('lbc'),lcards=[],cur=0;
+  function open(i){cur=(i+lcards.length)%lcards.length;var c=lcards[cur],im=c.querySelector('img');li.src=im.src;li.alt=im.alt;
+    lc.textContent=(cur+1)+' / '+lcards.length+' · '+c.querySelector('.nx-cap').textContent;
+    if(!lb.open)lb.showModal();c.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'})}
+  document.getElementById('lbp').onclick=function(){open(cur-1)};
+  document.getElementById('lbn').onclick=function(){open(cur+1)};
+  document.getElementById('lbx').onclick=function(){lb.close()};
+  lb.addEventListener('click',function(e){if(e.target===lb)lb.close()});
+  lb.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')open(cur-1);if(e.key==='ArrowRight')open(cur+1)});
+  var tx=null;li.addEventListener('touchstart',function(e){tx=e.touches[0].clientX},{passive:true});
+  li.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>40)open(cur+(dx<0?1:-1))});
+
+  // Fileiras estilo Netflix
+  [].forEach.call(document.querySelectorAll('.nx'),function(nx){
+    var tr=nx.querySelector('.nx-track'),barw=nx.querySelector('.nx-bar'),bar=barw.querySelector('i'),
+        prev=nx.querySelector('.nx-prev'),next=nx.querySelector('.nx-next');
+    function upd(){var max=tr.scrollWidth-tr.clientWidth,x=tr.scrollLeft;prev.disabled=x<=2;next.disabled=x>=max-2;
+      var vis=Math.min(1,tr.clientWidth/tr.scrollWidth);barw.style.visibility=max<=2?'hidden':'visible';
+      bar.style.width=(vis*100)+'%';bar.style.marginLeft=(max>0?(x/max)*(1-vis)*100:0)+'%'}
+    tr.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+    function go(d){tr.scrollBy({left:d*tr.clientWidth*.85,behavior:'smooth'})}
+    prev.onclick=function(){go(-1)};next.onclick=function(){go(1)};
+    function reveal(){nx.classList.add('in');nx.classList.remove('pre')}
+    if('IntersectionObserver' in window){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){reveal();io.disconnect()}},{threshold:.2});io.observe(nx)}else reveal();
+    // arrastar com o mouse
+    var down=false,sx=0,sl=0,moved=0;
+    tr.addEventListener('dragstart',function(e){e.preventDefault()});
+    tr.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button)return;down=true;moved=0;sx=e.clientX;sl=tr.scrollLeft});
+    window.addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;moved=Math.max(moved,Math.abs(dx));if(moved>6)tr.classList.add('drag');tr.scrollLeft=sl-dx});
+    window.addEventListener('pointerup',function(){if(!down)return;down=false;setTimeout(function(){tr.classList.remove('drag')},0)});
+    tr.addEventListener('click',function(e){if(moved>6){e.stopPropagation();e.preventDefault();moved=0}},true);
+    // galeria abre em tela cheia
+    if(nx.hasAttribute('data-lb')){
+      var cards=[].slice.call(tr.querySelectorAll('.nx-card'));
+      cards.forEach(function(c,i){c.addEventListener('click',function(){lcards=cards;open(i)})});
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')),i=0,t,
+      playing=!window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+      pp=document.getElementById('pp'),ppi=document.getElementById('ppi');
+  var PAUSE='<rect x="7" y="5" width="3.5" height="14" rx="1"/><rect x="13.5" y="5" width="3.5" height="14" rx="1"/>',PLAY='<path d="M8 5l11 7-11 7z"/>';
+  function show(n){i=(n+slides.length)%slides.length;slides.forEach(function(s,k){s.classList.toggle('on',k===i);s.setAttribute('aria-hidden',k!==i);[].forEach.call(s.querySelectorAll('a'),function(a){a.tabIndex=k===i?0:-1})})}
+  function run(){clearInterval(t);if(playing)t=setInterval(function(){show(i+1)},6500);ppi.innerHTML=playing?PAUSE:PLAY;pp.setAttribute('aria-label',playing?'Pausar':'Continuar')}
+  document.getElementById('prev').onclick=function(){show(i-1);run()};
+  document.getElementById('next').onclick=function(){show(i+1);run()};
+  pp.onclick=function(){playing=!playing;run()};
+  run();
+  var d=document.getElementById('drawer'),o=document.getElementById('open');
+  function set(v){d.classList.toggle('open',v);d.setAttribute('aria-hidden',!v);o.setAttribute('aria-expanded',v);if(v)document.getElementById('close').focus();else o.focus()}
+  o.onclick=function(){set(true)};
+  document.getElementById('close').onclick=document.getElementById('scrim').onclick=function(){set(false)};
+  [].forEach.call(d.querySelectorAll('a.l'),function(a){a.addEventListener('click',function(){d.classList.remove('open');d.setAttribute('aria-hidden',true);o.setAttribute('aria-expanded',false)})});
+  var vm=document.getElementById('vm'),vv=document.getElementById('vmv');
+  var vcache={};
+  function vsrc(s){if(s.slice(0,5)!=='data:')return s;if(vcache[s])return vcache[s];try{var p=s.indexOf(','),m=s.slice(5,s.indexOf(';')),bin=atob(s.slice(p+1)),a=new Uint8Array(bin.length);for(var k=0;k<bin.length;k++)a[k]=bin.charCodeAt(k);return vcache[s]=URL.createObjectURL(new Blob([a],{type:m}))}catch(e){return s}}
+  [].forEach.call(document.querySelectorAll('video[data-vsl]'),function(v){v.src=vsrc(v.dataset.vsl)});
+  [].forEach.call(document.querySelectorAll('.vbtn'),function(b){b.addEventListener('click',function(){vv.src=vsrc(b.dataset.src);document.getElementById('vmt').textContent=b.dataset.t;vm.showModal();vv.play().catch(function(){})})});
+  vm.addEventListener('close',function(){vv.pause();vv.removeAttribute('src');vv.load()});
+  vm.addEventListener('click',function(e){if(e.target===vm)vm.close()});
+  vm.querySelector('.vx').onclick=function(){vm.close()};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('open'))set(false)});
+})();
+</script>
+</body>
+</html>
